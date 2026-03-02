@@ -82,6 +82,7 @@ See [best-practices.md](references/best-practices.md) for detailed description e
 - Only include knowledge the Agent doesn't already have
 - Reference bundled resources with relative paths
 - Keep references **1 level deep** (no nested file chains)
+- **Language Policy**: To save tokens, write the main instruction body in English. However, headers and user-facing output formats may be in Japanese to maintain readability for the user.
 
 For structural patterns, consult:
 - [workflows.md](references/workflows.md) — Sequential and conditional workflow patterns
