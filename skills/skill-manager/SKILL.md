@@ -1,11 +1,11 @@
 ---
 name: skill-manager
-description: Comprehensive skill lifecycle management for creating, reviewing, improving, and testing Agent Skills. Use when users want to (1) create a new skill from scratch, (2) review an existing skill against best practices, (3) improve or refactor a skill based on feedback, error logs, or conversation history, (4) generate evaluation test cases for a skill. Triggers on keywords like 'skill', 'create skill', 'improve skill', 'review skill', 'skill quality', 'SKILL.md'. Do NOT use for general code review unrelated to skill development, nor for MCP server configuration, nor for general project instruction files (e.g. .cursorrules, CLAUDE.md).
+description: Comprehensive skill lifecycle management for creating, reviewing, and improving Agent Skills. Use when users want to (1) create a new skill from scratch, (2) review an existing skill against best practices, (3) improve or refactor a skill based on feedback, error logs, or conversation history. Triggers on keywords like 'skill', 'create skill', 'improve skill', 'review skill', 'skill quality', 'SKILL.md'. Do NOT use for general code review unrelated to skill development, nor for MCP server configuration, nor for general project instruction files (e.g. .cursorrules, CLAUDE.md).
 ---
 
 # Skill Manager
 
-Manage the full lifecycle of Agent Skills: creation, review, improvement, and testing.
+Manage the full lifecycle of Agent Skills: creation, review, and improvement.
 
 ## Mode Selection
 
@@ -14,7 +14,6 @@ Determine the appropriate workflow based on the user's request:
 1. **New skill requested?** → Follow "Creation Workflow"
 2. **Existing skill needs quality check?** → Follow "Review Workflow"
 3. **Skill has issues or feedback exists?** → Follow "Improvement Workflow"
-4. **Need to verify skill reliability?** → Follow "Testing Workflow"
 
 If unclear, ask the user which mode to use.
 
@@ -192,48 +191,3 @@ Common improvement patterns:
 1. Run `scripts/quick_validate.py` to verify structural integrity
 2. Test the modified skill with the original failing scenario
 3. Test with edge cases to ensure the fix doesn't introduce regressions
-
----
-
-## Testing Workflow
-
-Define evaluation criteria and test cases for a skill.
-
-### Step 1: Define Test Cases
-
-For each key usage pattern, create a test case:
-
-```json
-{
-  "name": "descriptive-test-name",
-  "prompt": "User prompt that should trigger the skill",
-  "test_files": ["optional/input/files"],
-  "expected": {
-    "format": "Expected output structure description",
-    "assertions": [
-      "Specific verifiable condition 1",
-      "Specific verifiable condition 2"
-    ]
-  }
-}
-```
-
-### Step 2: Include Edge Cases
-
-Test at minimum:
-- Normal usage (happy path)
-- Boundary conditions (empty input, very large input)
-- Negative cases (prompts that should NOT trigger the skill)
-- Multiple trigger patterns from the description
-
-### Step 3: Execute and Verify
-
-Run each test case and verify:
-1. Skill triggers correctly (or correctly does not trigger)
-2. Output matches expected format and content
-3. No unnecessary token consumption or file reads
-4. Scripts execute without errors
-
-### Step 4: Document Results
-
-Record pass/fail status and any issues discovered for the improvement workflow.
